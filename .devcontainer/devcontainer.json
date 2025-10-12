@@ -1,0 +1,42 @@
+{
+  "name": "EngineEngine",
+
+  // Use your Dockerfile
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  
+  "workspaceFolder": "/workspaces/EngineEngine",
+  "runArgs": [
+      "--gpus",
+      "all",
+      "-e", "DISPLAY=:1",
+      "--mount", "type=bind,source=/tmp/.X11-unix,target=/tmp/.X11-unix"
+  ],
+
+
+  // Features and extensions
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {}
+  },
+  "customizations": {
+    "vscode": {
+       "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "twxs.cmake",
+        "ms-vscode.cpptools-extension-pack"
+      ]
+    }
+  },
+
+  "remoteUser": "ubuntu"
+}
+
+
+
+
