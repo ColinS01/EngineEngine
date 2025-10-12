@@ -1,0 +1,7 @@
+# Ignore everything by default
+/*
+
+# Except src/ and .devcontainer/
+!.gitignore
+!src/
+!.devcontainer/
