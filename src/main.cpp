@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 
 #include <core/Triangle.hpp>
+#include <core/Square.hpp>
 
 void processInput(GLFWwindow *window)
 {
@@ -45,6 +46,10 @@ int main() {
     }  
 
     Core::Triangle triangle; // stack allocation
+    Core::Square square;
+
+    triangle.upload();
+    square.upload();
 
     // render loop
     while(!glfwWindowShouldClose(window))
@@ -53,7 +58,9 @@ int main() {
         processInput(window);
 
         // rendering commands here
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+        
         triangle.drawVisualObject();
 
         // check and call events and swap the buffers
