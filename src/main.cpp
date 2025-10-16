@@ -1,46 +1,64 @@
 #include <iostream>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-const double WIDTH = 800;
-const double HEIGHT = 600;
+#include <core/Triangle.hpp>
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+void processInput(GLFWwindow *window)
 {
-    glViewport(0, 0, WIDTH, HEIGHT);
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
 }
 
 int main() {
 
+    /* Init GLFW */
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW\n";
         return -1;
     }
 
+    /* Setting Window Hints */
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-    GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+    /* Create the window of out desired size */
+    GLFWwindow* window = glfwCreateWindow(1200, 800, "LearnOpenGL", NULL, NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
         return -1;
     }
+
+    /* Set out new window as the context */
     glfwMakeContextCurrent(window);
 
+    /* Init GLAD */
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }  
 
+    Core::Triangle triangle; // stack allocation
+
+    // render loop
     while(!glfwWindowShouldClose(window))
     {
-        glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);  
+        // input
+        processInput(window);
+
+        // rendering commands here
+        glClear(GL_COLOR_BUFFER_BIT);
+        triangle.drawVisualObject();
+
+        // check and call events and swap the buffers
+        glfwPollEvents();
         glfwSwapBuffers(window);
-        glfwPollEvents();    
     }
 
     glfwTerminate();
