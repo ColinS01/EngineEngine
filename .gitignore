@@ -6,4 +6,5 @@ include/glm
 !.gitignore
 !src/
 !include/
+!shaders/
 !CMakeLists.txt
