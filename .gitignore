@@ -1,7 +1,8 @@
 # Ignore everything by default
 /*
+include/glm
 
 # Except src/ and .devcontainer/
 !.gitignore
 !src/
-!.devcontainer/
+!include/
