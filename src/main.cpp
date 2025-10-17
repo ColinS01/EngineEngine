@@ -53,7 +53,7 @@ void processInput(GLFWwindow *window)
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
     {
-        focusedObject->rotateVisualObject(glm::vec3(rot_speed, 0.0f, -0.0f));
+        focusedObject->rotateVisualObject(glm::vec3(-rot_speed, 0.0f, -0.0f));
         
     }
 }
