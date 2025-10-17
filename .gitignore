@@ -6,3 +6,4 @@ include/glm
 !.gitignore
 !src/
 !include/
+!CMakeLists.txt
