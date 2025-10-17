@@ -3,13 +3,14 @@
 
 namespace Core {
 
-VisualObject::VisualObject(glm::vec3 spawn_pos, glm::vec3 spawn_rot) {
+VisualObject::VisualObject(glm::vec3 spawn_pos, glm::vec3 spawn_rot, float spawn_scale) {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
 
     current_pos = spawn_pos;
     current_rot = spawn_rot;
+    current_scale = spawn_scale;
 }
 
 VisualObject::~VisualObject() {
@@ -62,6 +63,7 @@ void VisualObject::drawVisualObject(bool outlineOnly) {
 
     // Send model matrix to shader
     shader->setMat4("model", model);
+    shader->setBool("isSelected", isSelected);
 
     if (outlineOnly) {
         // --- Outline mode ---

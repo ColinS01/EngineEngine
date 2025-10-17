@@ -95,13 +95,15 @@ int main() {
 
     Shader ourShader("../shaders/Vertex.vs", "../shaders/Fragment.fs");
 
-    Core::Triangle triangle;
-    Core::Cube cube;
+    Core::Cube cube_1 = Core::Cube(glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f), 0.2f);
+    Core::Cube cube_2 = Core::Cube(glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.0f), 0.2f);
 
     // ui_.addObject(triangle, ourShader);
-    ui_.addObject(cube, ourShader);
+    ui_.scene.addObject(cube_1, ourShader);
+    ui_.scene.addObject(cube_2, ourShader);
 
-    focusedObject = &cube;
+    cube_2.setSelected(true);
+    focusedObject = &cube_2;
 
     // render loop
     while (!glfwWindowShouldClose(window)) {
@@ -125,7 +127,7 @@ int main() {
         ourShader.setMat4("projection", projection);
         ourShader.setMat4("view", view);
 
-        ui_.drawAll(wireframeMode); // inside this, each object calls its own drawVisualObject()
+        ui_.scene.drawAll(wireframeMode); // inside this, each object calls its own drawVisualObject()
 
         glfwSwapBuffers(window);
         glfwPollEvents();

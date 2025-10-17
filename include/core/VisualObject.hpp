@@ -12,8 +12,11 @@ namespace Core {
 
 class VisualObject {
 public:
-    VisualObject(glm::vec3 spawn_pos = glm::vec3(0.0f),
-             glm::vec3 spawn_rot = glm::vec3(0.0f));
+    VisualObject(
+        glm::vec3 spawn_pos = glm::vec3(0.0f),
+        glm::vec3 spawn_rot = glm::vec3(0.0f),
+        float spawn_scale = 1.0f
+    );
              
     virtual ~VisualObject();
 
@@ -24,6 +27,8 @@ public:
 
     void rotateVisualObject(glm::vec3 rot);
 
+    void setSelected(bool selected) { isSelected = selected; }
+
 protected:
     std::vector<float> vertices;
     std::vector<unsigned int> indices;
@@ -33,6 +38,11 @@ protected:
 
     glm::vec3 current_pos;      // object position
     glm::vec3 current_rot;      // rotation in degrees: x=pitch, y=yaw, z=roll
+
+    float default_size = 1.0f;
+    float current_scale;
+
+    bool isSelected = false;
 };
 
 } // namespace Core

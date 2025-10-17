@@ -8,25 +8,30 @@ namespace Core {
 class Cube : public VisualObject {
 public:
     // Constructor: optional spawn position & rotation
-    Cube(glm::vec3 spawn_pos = glm::vec3(0.0f), 
-         glm::vec3 spawn_rot = glm::vec3(0.0f))
-        : VisualObject(spawn_pos, spawn_rot)
+    Cube(
+        glm::vec3 spawn_pos = glm::vec3(0.0f), 
+        glm::vec3 spawn_rot = glm::vec3(0.0f),
+        float spawn_scale = 1.0f
+        )
+        : VisualObject(spawn_pos, spawn_rot, spawn_scale)
     {
         // Define cube vertices (positions + colors)
         // 8 corners, repeated for each face with color per vertex
+
+        float size = current_scale * default_size;
         vertices = {
             // positions           // colors
             // Front face
-            -0.5f, -0.5f,  0.5f,   1.0f, 0.0f, 0.0f,
-             0.5f, -0.5f,  0.5f,   0.0f, 1.0f, 0.0f,
-             0.5f,  0.5f,  0.5f,   0.0f, 0.0f, 1.0f,
-            -0.5f,  0.5f,  0.5f,   1.0f, 1.0f, 0.0f,
+            -size, -size,  size,   size, 0.0f, 0.0f,
+             size, -size,  size,   0.0f, size, 0.0f,
+             size,  size,  size,   0.0f, 0.0f, size,
+            -size,  size,  size,   size, size, 0.0f,
 
             // Back face
-            -0.5f, -0.5f, -0.5f,   1.0f, 0.0f, 1.0f,
-             0.5f, -0.5f, -0.5f,   0.0f, 1.0f, 1.0f,
-             0.5f,  0.5f, -0.5f,   1.0f, 1.0f, 1.0f,
-            -0.5f,  0.5f, -0.5f,   0.5f, 0.5f, 0.5f
+            -size, -size, -size,   size, 0.0f, size,
+             size, -size, -size,   0.0f, size, size,
+             size,  size, -size,   size, size, size,
+            -size,  size, -size,   size, size, size
         };
 
         // Define cube indices for triangles
